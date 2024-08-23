@@ -1,0 +1,35 @@
+﻿@model Library.Models.ReturnBookViewModel
+
+@{
+    ViewData["Title"] = "Return Book";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="ReturnBook" method="post">
+    <input type="hidden" asp-for=" BookId" />
+
+    <div class="form-group">
+        <label asp-for="NationalId" class="control-label">National ID</label>
+        <input asp-for="NationalId" class="form-control" />
+        <span asp-validation-for="NationalId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReturnDate" class="control-label">Return Date</label>
+        <input asp-for="ReturnDate" class="form-control" type="date" />
+        <span asp-validation-for="ReturnDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Return Book" class="btn btn-primary" />
+    </div>
+</form>
+
+<a href="@Url.Action("GetAllBooks", "LibraryOwner")" class="btn btn-secondary">Back to Book List</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

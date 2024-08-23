@@ -12,6 +12,7 @@
 
         public DateTime BorrowDate { get; set; }
         public DateTime? ReturnDate { get; set; }
+
     }
 
 }

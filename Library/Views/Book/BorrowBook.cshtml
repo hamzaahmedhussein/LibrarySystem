@@ -1,0 +1,44 @@
+﻿@model Library.ViewModels.BorrowBookViewModel
+
+@{
+    ViewData["Title"] = "Borrow Book";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form asp-action="BorrowBook" method="post">
+    <div class="form-group">
+        <label asp-for="BookId" class="control-label"></label>
+        <input asp-for="BookId" class="form-control" type="hidden" />
+        <span asp-validation-for="BookId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Your Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NationalId" class="control-label">National ID</label>
+        <input asp-for="NationalId" class="form-control" />
+        <span asp-validation-for="NationalId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ReturnDate" class="control-label">Return Date</label>
+        <input asp-for="ReturnDate" class="form-control" type="date" />
+        <span asp-validation-for="ReturnDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Borrow Book" class="btn btn-primary" />
+    </div>
+</form>
+
+<a href="@Url.Action("GetAllBooks", "book")" class="btn btn-secondary">Back to Book List</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
