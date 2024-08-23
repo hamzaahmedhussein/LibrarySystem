@@ -1,0 +1,83 @@
+﻿@using Library.Models
+@using Library.ViewModels
+@model Library.ViewModels.PagedResult<Library.ViewModels.BookViewModel>
+
+<h3>Books</h3>
+
+@if (Model.Results.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Picture</th>
+                    <th>Number of Books</th>
+                    <th>Number of Available Books</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Results)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(book.Picture))
+                            {
+                                <img src="@book.Picture" alt="@book.Title" style="width: 50px; height: auto;" />
+                            }
+                            else
+                            {
+                                <p>No Image</p>
+                            }
+                        </td>
+                        <td>@book.NumberOfBooks</td>
+                        <td>@book.NumberOfAvailableBooks</td>
+                        <td>
+                            @if (book.NumberOfAvailableBooks > 0)
+                            {
+                                <a class="btn btn-primary" href="@Url.Action("BorrowBook", new { id = book.Id })">Borrow</a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary" disabled>Not Available</button>
+                            }
+
+                            @if (book.NumberOfBooks == book.NumberOfAvailableBooks)
+                            {
+                                <button class="btn btn-success" disabled>Return</button>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success" href="@Url.Action("ReturnBook", new { id = book.Id })">Return</a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("GetAllBooks", new { pageNumber = Model.CurrentPage - 1, pageSize = Model.PageSize })">Previous</a>
+            </li>
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("GetAllBooks", new { pageNumber = i, pageSize = Model.PageSize })">@i</a>
+                </li>
+            }
+            <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("GetAllBooks", new { pageNumber = Model.CurrentPage + 1, pageSize = Model.PageSize })">Next</a>
+            </li>
+        </ul>
+    </nav>
+}
+else
+{
+    <p>No books found.</p>
+}
