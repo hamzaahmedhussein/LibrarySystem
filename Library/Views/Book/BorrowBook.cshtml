@@ -30,11 +30,11 @@
         <span asp-validation-for="ReturnDate" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-3">
         <input type="submit" value="Borrow Book" class="btn btn-primary" />
     </div>
 </form>
-
+<br />
 <a href="@Url.Action("GetAllBooks", "book")" class="btn btn-secondary">Back to Book List</a>
 
 @section Scripts {

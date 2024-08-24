@@ -38,6 +38,11 @@ namespace Library.Controllers
                     return RedirectToAction("getallbooks", "book");
                 }
 
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
             }
             return View("Register", model);
 
@@ -55,7 +60,7 @@ namespace Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.isPersistent = false, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.isPersistent, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("getallbooks", "book");
@@ -66,6 +71,13 @@ namespace Library.Controllers
             return View(model);
 
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("login", "libraryOwner");
+        }
+
 
     }
 }

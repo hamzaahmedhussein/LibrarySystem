@@ -7,6 +7,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="ReturnBook" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <input type="hidden" asp-for=" BookId" />
 
     <div class="form-group">
@@ -21,12 +22,12 @@
         <span asp-validation-for="ReturnDate" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-3">
         <input type="submit" value="Return Book" class="btn btn-primary" />
     </div>
 </form>
-
-<a href="@Url.Action("GetAllBooks", "LibraryOwner")" class="btn btn-secondary">Back to Book List</a>
+<br />
+<a href="@Url.Action("GetAllBooks", "book")" class="btn btn-secondary">Back to Book List</a>
 
 @section Scripts {
     @{

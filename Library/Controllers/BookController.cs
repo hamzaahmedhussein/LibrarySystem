@@ -151,7 +151,6 @@ namespace Library.Controllers
 
             _context.BorrowingRecords.Add(borrowingRecord);
 
-            // Update book availability
             book.NumberOfAvailableBooks--;
 
             await _context.SaveChangesAsync();
@@ -189,7 +188,7 @@ namespace Library.Controllers
 
             if (borrowingRecord == null)
             {
-                ModelState.AddModelError("", "No matching borrowing record found for the provided Book ID and National ID.");
+                ModelState.AddModelError("", "No matching borrowing record found National ID.");
                 return View(model);
             }
 
