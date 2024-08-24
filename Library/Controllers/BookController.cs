@@ -30,11 +30,7 @@ namespace Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.NumberOfAvailableBooks > model.NumberOfBooks)
-                {
-                    ModelState.AddModelError("", "The number of available books cannot be greater than the total number of books.");
-                    return View(model);
-                }
+
 
                 var currentUser = await _userManager.GetUserAsync(User);
                 if (currentUser == null)
@@ -50,8 +46,8 @@ namespace Library.Controllers
                     Picture = picturePath,
                     Description = model.Description,
                     NumberOfBooks = model.NumberOfBooks,
+                    NumberOfAvailableBooks = model.NumberOfBooks,
                     PublishedYear = model.PublishedYear,
-                    NumberOfAvailableBooks = model.NumberOfAvailableBooks,
                     LibraryOwnerId = currentUser.Id,
                 };
 

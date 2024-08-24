@@ -7,7 +7,6 @@
         public string Author { get; set; }
         public int PublishedYear { get; set; }
         public int NumberOfBooks { get; set; }
-        public int NumberOfAvailableBooks { get; set; }
         public string Description { get; set; }
 
 

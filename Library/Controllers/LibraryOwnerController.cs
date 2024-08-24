@@ -35,7 +35,7 @@ namespace Library.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("getallbooks", "book");
                 }
 
             }
@@ -58,7 +58,7 @@ namespace Library.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.isPersistent = false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("getallbooks", "book");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
 
